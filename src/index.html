@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDP GraphQL API Platform</title>
+    
+    <!-- CSS Libraries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+	
+	<!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+</head>
+<body>
+    <!-- Login Form Section -->
+    <div id="loginForm" class="container mx-auto px-4 py-8">
+        <div class="max-w-md mx-auto glass-effect p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">
+                    IDP GraphQL API Platform
+                </h1>
+                <p class="text-gray-400 mt-2">Advanced IDP Assessment Interface</p>
+            </div>
+            
+            <div id="loginError" class="hidden bg-red-900/50 border border-red-500/50 text-red-200 px-4 py-3 rounded mb-4"></div>
+            
+            <form id="authForm" class="space-y-6" autocomplete="off">
+                <div>
+                    <label class="block text-gray-300 text-sm font-semibold mb-2" for="region">Region</label>
+                    <select id="region" required class="cyber-input w-full px-4 py-2" autocomplete="off">
+                        <option value="us1">US-1</option>
+                        <option value="us2">US-2</option>
+                        <option value="eu1">EU-1</option>
+                        <option value="gov1">US-GOV-1</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-300 text-sm font-semibold mb-2" for="clientId">API ID</label>
+                    <input type="text" id="clientId" required class="cyber-input w-full px-4 py-2"
+                           autocomplete="off" autocapitalize="off" spellcheck="false">
+                </div>
+                
+                <div>
+                    <label class="block text-gray-300 text-sm font-semibold mb-2" for="clientSecret">API Secret</label>
+                    <input type="password" id="clientSecret" required class="cyber-input w-full px-4 py-2"
+                           autocomplete="new-password" autocapitalize="off" spellcheck="false">
+                </div>
+                
+                <button type="submit" class="cyber-button w-full">
+                    <i class="fas fa-lock mr-2"></i>Authenticate
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Dashboard Section -->
+    <div id="dashboard" class="hidden">
+        <!-- Navigation Bar -->
+        <nav class="glass-effect mb-8">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center py-4">
+                    <h1 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">
+                        IDP GraphQL API Platform
+                    </h1>
+                    <div class="flex items-center space-x-4">
+                        <span id="externalIP" class="session-timer"></span>
+                        <span id="sessionTimer" class="session-timer"></span>
+                        <button onclick="refreshToken()" class="refresh-button">
+                            <i class="fas fa-sync-alt"></i>Refresh Token
+                        </button>
+                        <button onclick="logout()" class="cyber-button bg-gradient-to-r from-red-500 to-red-700">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Container -->
+        <div class="container mx-auto px-4">
+            <!-- Assessment Type Selection -->
+            <div class="glass-effect p-6 mb-8">
+                <h2 class="text-xl font-bold mb-4">Select Assessment Type</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button onclick="showDomainRisks()" class="cyber-button">
+                        <i class="fas fa-shield-alt mr-2"></i>Domain Risks Assessment
+                    </button>
+                    <button onclick="showEntityQueries()" class="cyber-button">
+                        <i class="fas fa-search mr-2"></i>Entity Queries
+                    </button>
+                    <button onclick="showServiceAccess()" class="cyber-button">
+                        <i class="fas fa-network-wired mr-2"></i>Query Service Access
+                    </button>
+                </div>
+            </div>
+
+            <!-- Placeholder sections for dynamic content -->
+            <div id="domainRisksSection" class="hidden"></div>
+            <div id="entityQueriesSection" class="hidden"></div>
+            <div id="serviceAccessSection" class="hidden"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript imports will go here -->
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/domain-assessment.js"></script>
+    <script src="js/service-access.js"></script>
+    <script src="js/entity-queries.js"></script>
+</body>
+</html>

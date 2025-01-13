@@ -1,0 +1,290 @@
+/* styles.css */
+
+/* Root Variables for Theme */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --accent-color: #3b82f6;
+    --background-dark: #0f172a;
+    --text-light: #f8fafc;
+}
+
+/* Base Styles */
+body {
+    background: linear-gradient(135deg, var(--background-dark) 0%, #1e293b 100%);
+    color: var(--text-light);
+    min-height: 100vh;
+}
+
+/* Reusable UI Components */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+}
+
+/* Form Input Styling */
+.cyber-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+.cyber-input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    outline: none;
+}
+
+/* Select Input Styling */
+select.cyber-input option {
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    padding: 8px;
+}
+
+select.cyber-input:focus {
+    background-color: var(--background-dark);
+    color: var(--text-light);
+}
+
+/* Button Styling */
+.cyber-button {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cyber-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Refresh Button Styling */
+.refresh-button {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.refresh-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+}
+
+/* Multiselect Dropdown Styling */
+.multiselect-dropdown {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.multiselect-dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--background-dark);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.multiselect-dropdown-list.show {
+    display: block;
+}
+
+/* Selected Items Display */
+.selected-items {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.selected-item {
+    background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.remove-item {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.remove-item:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Entity Query Dropdown Style */
+#queryType {
+    background-color: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+}
+
+#queryType option {
+    background-color: rgba(15, 23, 42, 0.95);
+    color: var(--text-light);
+    padding: 8px;
+}
+
+/* DataTable Styling */
+.dataTables_wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.9) !important;
+    position: relative;
+}
+
+table.dataTable thead th {
+    color: var(--text-light) !important;
+    background-color: rgba(15, 23, 42, 0.95) !important;
+    border-bottom: 2px solid rgba(59, 130, 246, 0.5) !important;
+    font-weight: bold;
+    padding: 12px 8px;
+    font-size: 1.1rem;
+}
+
+table.dataTable tbody td {
+    color: var(--text-light) !important;
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    padding: 12px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+table.dataTable tbody tr:nth-of-type(odd) td {
+    background-color: rgba(15, 23, 42, 0.9) !important;
+}
+
+table.dataTable tbody tr:hover td {
+    background-color: rgba(37, 99, 235, 0.7) !important;
+    transition: background-color 0.2s ease;
+}
+
+/* DataTable Controls Styling */
+.dataTables_length, 
+.dataTables_filter, 
+.dataTables_info, 
+.dataTables_paginate {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dataTables_length label,
+.dataTables_filter label {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.dataTables_length select {
+    background-color: rgba(15, 23, 42, 0.9) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(59, 130, 246, 0.3) !important;
+}
+
+.dataTables_length select option {
+    background-color: rgba(15, 23, 42, 0.95);
+    color: var(--text-light);
+    padding: 8px;
+}
+
+.dataTables_filter input {
+    background-color: rgba(15, 23, 42, 0.9) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Pagination Styling */
+.dataTables_paginate .paginate_button {
+    color: rgba(255, 255, 255, 0.9) !important;
+    background: rgba(59, 130, 246, 0.2) !important;
+    border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 0 2px;
+}
+
+.dataTables_paginate .paginate_button:hover {
+    background: rgba(59, 130, 246, 0.4) !important;
+    color: white !important;
+}
+
+.dataTables_paginate .paginate_button.current {
+    background: var(--primary-color) !important;
+    color: white !important;
+    border: 1px solid var(--primary-color) !important;
+}
+
+/* Export Button Styling */
+.dt-button.cyber-button {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) !important;
+    color: white !important;
+    opacity: 1 !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+}
+
+.dt-button.cyber-button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* Loading Animation */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    border-radius: 16px;
+}
+
+.loading-spinner {
+    color: var(--primary-color);
+    font-size: 2em;
+}
+
+/* Session Timer */
+.session-timer {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: monospace;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
