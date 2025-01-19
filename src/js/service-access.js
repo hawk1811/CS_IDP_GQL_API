@@ -250,19 +250,20 @@ async function executeServiceAccessQuery() {
         }
 
         const allResults = [];
-        let hasPreviousPage = true;
+        let hasNextPage = true;
         let cursor = null;
 
-        while (hasPreviousPage && (!dataLimit || allResults.length < dataLimit)) {
+        while (hasNextPage && (!dataLimit || allResults.length < dataLimit)) {
             const query = `{
                 timeline(
                     types: [SERVICE_ACCESS]
                     activityQuery: { ${filterPart} }
-                    last: 1000
-                    ${cursor ? `before: "${cursor}"` : ''}
+                    first: 1000
+					sortOrder: DESCENDING
+                    ${cursor ? `after: "${cursor}"` : ''}
                 ) {
                     pageInfo {
-                        hasPreviousPage
+                        hasNextPage
                         startCursor
                     }
                     nodes {
@@ -307,7 +308,7 @@ async function executeServiceAccessQuery() {
                 );
             }
 
-            hasPreviousPage = response.data.timeline.pageInfo.hasPreviousPage;
+            hasNextPage = response.data.timeline.pageInfo.hasNextPage;
             cursor = response.data.timeline.pageInfo.startCursor;
 
             if (dataLimit && allResults.length >= dataLimit) break;
